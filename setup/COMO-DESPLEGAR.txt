@@ -1,0 +1,71 @@
+═══════════════════════════════════════════════════════════
+  CUMple Daira — Despliegue en GitHub + registro de visitas
+═══════════════════════════════════════════════════════════
+
+PARTE 1 — PUBLICAR EN GITHUB PAGES (link para enviar por email)
+────────────────────────────────────────────────────────────────
+
+1. Crea un repo en GitHub (ejemplo: cumple-daira)
+   https://github.com/new
+
+2. Sube los archivos del proyecto (index.html, css/, js/, audio/, etc.)
+
+3. En el repo: Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: main  →  / (root)
+   - Save
+
+4. En 1-2 minutos tendrás un link como:
+   https://TU-USUARIO.github.io/cumple-daira/
+
+   Ese link es el que envías por email.
+
+
+PARTE 2 — VER QUIÉN VISITA (IP, país, ciudad)
+────────────────────────────────────────────────
+
+GitHub Pages es estático: no puede guardar archivos en el servidor.
+La mejor opción GRATIS: Google Sheets (ves todo en una hoja de cálculo).
+
+Pasos:
+
+1. Crea una Google Sheet nueva:
+   https://sheets.google.com
+
+2. Menú: Extensiones → Apps Script
+
+3. Borra lo que haya y pega el contenido de:
+   setup/registro-visitas.gs
+
+4. Guardar → Implementar → Nueva implementación
+   - Tipo: Aplicación web
+   - Ejecutar como: Yo
+   - Quién tiene acceso: Cualquier persona
+   - Implementar
+
+5. Copia la URL que termina en /exec
+
+6. Abre js/config.js y pega la URL en:
+   analyticsWebhookUrl: "https://script.google.com/macros/s/XXXX/exec"
+
+7. Vuelve a subir config.js a GitHub
+
+Eventos que se registran:
+  • visita      → alguien abrió la página
+  • abrio_sobre → abrió el sobre (vio la celebración)
+
+Columnas en la hoja: fecha, evento, IP, país, ciudad, navegador, etc.
+
+
+PARTE 3 — MÚSICA (opcional)
+────────────────────────────
+
+Coloca tu MP3 en: audio/musica.mp3
+(Si no hay archivo, suena un tono de cumpleaños de respaldo)
+
+
+NOTAS
+─────
+• La IP la detecta un servicio gratuito (ipapi.co / ip-api.com)
+• Si Daira abre desde el móvil verás su IP y país aproximado en la hoja
+• No compartas la URL del Google Sheet, solo la del Apps Script en config.js

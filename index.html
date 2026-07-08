@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Una sorpresa especial para el cumpleaños de Daira"
+    />
+    <title>✨ Feliz Cumpleaños, Daira ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-theme="romantic">
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <button
+      id="music-toggle"
+      class="music-control"
+      type="button"
+      aria-label="Reproducir música"
+    >
+      <span class="music-icon">🎵</span>
+    </button>
+
+    <!-- Pantalla de entrada -->
+    <section id="intro-screen" class="intro-screen">
+      <div class="intro-vignette" aria-hidden="true"></div>
+      <div class="intro-petals" id="intro-petals" aria-hidden="true"></div>
+      <div class="intro-ambient" aria-hidden="true">
+        <span class="intro-orb intro-orb--1"></span>
+        <span class="intro-orb intro-orb--2"></span>
+        <span class="intro-orb intro-orb--3"></span>
+      </div>
+
+      <div class="intro-content">
+        <p class="intro-eyebrow intro-enter" style="--enter-i: 0">
+          <span class="eyebrow-line" aria-hidden="true"></span>
+          <span>Algo bonito te espera</span>
+          <span class="eyebrow-line" aria-hidden="true"></span>
+        </p>
+
+        <div class="envelope-scene intro-enter" style="--enter-i: 1" id="envelope-scene">
+          <span class="tap-ring" aria-hidden="true"></span>
+          <div
+            class="envelope"
+            id="open-envelope"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir sorpresa"
+          >
+            <div class="envelope-shadow" aria-hidden="true"></div>
+            <div class="envelope-back" aria-hidden="true"></div>
+            <div class="envelope-letter" aria-hidden="true">
+              <div class="letter-fold">
+                <span class="letter-line"></span>
+                <span class="letter-preview">Para ti, con cariño...</span>
+                <span class="letter-heart">💕</span>
+              </div>
+            </div>
+            <div class="envelope-body" aria-hidden="true"></div>
+            <div class="envelope-flap" aria-hidden="true"></div>
+            <div class="envelope-seal" aria-hidden="true">🌸</div>
+          </div>
+          <div class="envelope-sparkles" id="envelope-sparkles" aria-hidden="true"></div>
+        </div>
+
+        <h1 class="intro-title intro-enter" style="--enter-i: 2">
+          Para ti, <em>Daira</em>
+        </h1>
+        <p class="intro-hint intro-enter" style="--enter-i: 3">
+          <span class="hint-pulse" aria-hidden="true"></span>
+          Toca el sobre para abrir
+        </p>
+        <p class="intro-date intro-enter" style="--enter-i: 4">8 de julio</p>
+      </div>
+    </section>
+
+    <!-- Celebración principal -->
+    <main id="celebration" class="celebration hidden">
+      <div id="launch-flash" class="launch-flash" aria-hidden="true"></div>
+
+      <div class="celebration-bg" aria-hidden="true">
+        <span class="orb orb-1"></span>
+        <span class="orb orb-2"></span>
+        <span class="orb orb-3"></span>
+      </div>
+
+      <div class="sparkle-field" aria-hidden="true">
+        <span class="sparkle"></span><span class="sparkle"></span
+        ><span class="sparkle"></span> <span class="sparkle"></span
+        ><span class="sparkle"></span><span class="sparkle"></span>
+        <span class="sparkle"></span><span class="sparkle"></span
+        ><span class="sparkle"></span> <span class="sparkle"></span
+        ><span class="sparkle"></span><span class="sparkle"></span>
+      </div>
+
+      <div
+        class="floating-hearts"
+        id="floating-hearts"
+        aria-hidden="true"
+      ></div>
+
+      <div class="balloons" aria-hidden="true">
+        <div class="balloon-wrap b1">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+        <div class="balloon-wrap b2">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+        <div class="balloon-wrap b3">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+        <div class="balloon-wrap b4">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+        <div class="balloon-wrap b5">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+        <div class="balloon-wrap b6">
+          <span class="balloon">🎈</span><span class="balloon-string"></span>
+        </div>
+      </div>
+
+      <header class="hero">
+        <div class="hero-cake reveal-item" style="--i: 0" aria-hidden="true">
+          🎂
+        </div>
+        <p class="hero-eyebrow reveal-item" style="--i: 1">
+          8 de julio · 29 años
+        </p>
+        <h1 class="hero-title">
+          <span class="title-line reveal-item" style="--i: 2">Feliz</span>
+          <span class="title-line title-accent reveal-item" style="--i: 3"
+            >Cumpleaños</span
+          >
+        </h1>
+        <p class="hero-name reveal-item" style="--i: 4">
+          <span class="name-shimmer">Daira</span>
+        </p>
+        <div class="age-ring reveal-item" style="--i: 5">
+          <svg class="age-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="age-ring-track" cx="60" cy="60" r="52"></circle>
+            <circle class="age-ring-progress" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="age-badge">
+            <span class="age-label">Hoy cumples</span>
+            <span id="age-counter" class="age-number">0</span>
+            <span class="age-label">años</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="wish-card reveal-scroll">
+        <div class="wish-card-glow"></div>
+        <div class="wish-card-inner">
+          <span class="wish-icon" aria-hidden="true">✨</span>
+          <p id="rotating-wish" class="rotating-wish"></p>
+          <div class="wish-dots" aria-hidden="true">
+            <span class="wish-dot active"></span>
+            <span class="wish-dot"></span>
+            <span class="wish-dot"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="letter reveal-scroll">
+        <div class="letter-paper">
+          <div class="letter-seal" aria-hidden="true">💌</div>
+          <h2 class="letter-heading">Un mensaje para ti, en tu día</h2>
+          <div class="letter-body">
+            <p class="letter-para reveal-scroll" style="--d: 0">
+              Hoy cumples <strong>29 años</strong> y quería que supieras que
+              este día no pasa desapercibido. Hay personas que dejan huella
+              aunque la vida las lleve por otro camino, y tú eres una de ellas.
+              Guardo con cariño cada recuerdo bonito que compartimos.
+            </p>
+            <p class="letter-para reveal-scroll" style="--d: 1">
+              Te deseo un año con alegria y con risas de verdad, con metas que
+              se cumplan, deseos hechos realidad y nuevas aventuras que te
+              deparen la vida. Eso es lo que más me gustaría para ti.
+            </p>
+            <p class="letter-para reveal-scroll" style="--d: 2">
+              Gracias por haber sido parte de mi historia. Que estos 29 sean
+              solo el inicio de todo lo hermoso que aún te espera, y que te
+              despiertes cada con esa sonrisa que siempre te caracteriza.
+            </p>
+          </div>
+          <p class="letter-sign reveal-scroll" style="--d: 3">
+            Con cariño,<br />de alguien que siempre deseará lo mejor para ti 💖
+          </p>
+        </div>
+      </section>
+
+      <section class="closing reveal-scroll">
+        <div class="closing-divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-icon">🌸</span>
+          <span class="divider-line"></span>
+        </div>
+        <blockquote class="closing-quote">
+          Ojalá al leer esto te quedes con una sonrisa. Hoy es tu día — mereces
+          sentirte especial, tranquila y feliz. De verdad.
+        </blockquote>
+        <p class="closing-line">29 años de magia</p>
+      </section>
+
+      <footer class="footer reveal-scroll">
+        <p class="footer-note">Hecho con cariño, solo para ti · 2026</p>
+      </footer>
+    </main>
+
+    <!-- Pon tu canción en audio/musica.mp3 (o cambia la ruta en js/main.js) -->
+    <audio id="birthday-music" loop preload="auto">
+      <source src="audio/musica.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
