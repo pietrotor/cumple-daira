@@ -65,18 +65,68 @@ function buildAnalyticsPayload(eventType, geo) {
   };
 }
 
-async function trackVisit(eventType) {
+function formatEventLabel(eventType) {
+  if (eventType === "abrio_sobre") return "💌 Abrió el sobre";
+  return "👀 Visitó la página";
+}
+
+function formatTelegramMessage(payload) {
+  const when = new Date(payload.fecha).toLocaleString("es-VE", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
+  return [
+    "<b>🎂 Cumple Daira — visita</b>",
+    "",
+    formatEventLabel(payload.evento),
+    `📅 ${when}`,
+    `🌍 ${payload.pais}${payload.codigo_pais ? ` (${payload.codigo_pais})` : ""}`,
+    `📍 ${payload.ciudad}${payload.region ? `, ${payload.region}` : ""}`,
+    `🔗 IP: ${payload.ip}`,
+    `📱 ${payload.pantalla} · ${payload.idioma}`,
+  ].join("\n");
+}
+
+async function sendToGoogleSheets(payload) {
   const webhookUrl = window.APP_CONFIG?.analyticsWebhookUrl;
   if (!webhookUrl) return;
 
-  const geo = await fetchVisitorGeo();
-  const payload = buildAnalyticsPayload(eventType, geo);
   const params = new URLSearchParams(payload);
   const url = `${webhookUrl}?${params.toString()}`;
 
-  try {
-    await fetch(url, { mode: "no-cors", keepalive: true });
-  } catch {
-    // Silent fail — la página sigue funcionando aunque falle el registro
-  }
+  await fetch(url, { mode: "no-cors", keepalive: true });
+}
+
+async function sendToTelegram(payload) {
+  const token = window.APP_CONFIG?.telegramBotToken;
+  const chatId = window.APP_CONFIG?.telegramChatId;
+  if (!token || !chatId) return;
+
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+  await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: formatTelegramMessage(payload),
+      parse_mode: "HTML",
+    }),
+    keepalive: true,
+  });
+}
+
+async function trackVisit(eventType) {
+  const hasGoogle = Boolean(window.APP_CONFIG?.analyticsWebhookUrl);
+  const hasTelegram = Boolean(
+    window.APP_CONFIG?.telegramBotToken && window.APP_CONFIG?.telegramChatId
+  );
+
+  if (!hasGoogle && !hasTelegram) return;
+
+  const geo = await fetchVisitorGeo();
+  const payload = buildAnalyticsPayload(eventType, geo);
+
+  await Promise.allSettled([sendToGoogleSheets(payload), sendToTelegram(payload)]);
 }

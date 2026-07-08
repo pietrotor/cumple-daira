@@ -3,7 +3,11 @@ window.APP_CONFIG = {
   age: 29,
   musicFile: "audio/musica.mp3",
 
-  // Pega aquí la URL del Google Apps Script (ver setup/COMO-DESPLEGAR.txt)
+  // ── OPCIÓN A: Telegram (recomendada, sin aviso de Google) ──
+  telegramBotToken: "8899546863:AAFqtR-GrPQMoHob-89hwVB7ra2z-C7vQDo",
+  telegramChatId: "8267099709",
+
+  // ── OPCIÓN B: Google Sheets (ver setup/COMO-DESPLEGAR.txt) ──
   analyticsWebhookUrl: "",
 
   wishes: [

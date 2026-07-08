@@ -1,71 +1,71 @@
 ═══════════════════════════════════════════════════════════
-  CUMple Daira — Despliegue en GitHub + registro de visitas
+  REGISTRO DE VISITAS — Elige UNA opción
 ═══════════════════════════════════════════════════════════
 
-PARTE 1 — PUBLICAR EN GITHUB PAGES (link para enviar por email)
-────────────────────────────────────────────────────────────────
-
-1. Crea un repo en GitHub (ejemplo: cumple-daira)
-   https://github.com/new
-
-2. Sube los archivos del proyecto (index.html, css/, js/, audio/, etc.)
-
-3. En el repo: Settings → Pages
-   - Source: Deploy from a branch
-   - Branch: main  →  / (root)
-   - Save
-
-4. En 1-2 minutos tendrás un link como:
-   https://TU-USUARIO.github.io/cumple-daira/
-
-   Ese link es el que envías por email.
+LINK DE LA PÁGINA (ya desplegada):
+  https://pietrotor.github.io/cumple-daira/
 
 
-PARTE 2 — VER QUIÉN VISITA (IP, país, ciudad)
-────────────────────────────────────────────────
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OPCIÓN A — TELEGRAM (recomendada, 3 minutos, sin Google)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-GitHub Pages es estático: no puede guardar archivos en el servidor.
-La mejor opción GRATIS: Google Sheets (ves todo en una hoja de cálculo).
+Recibes un mensaje en tu teléfono cuando alguien entra o abre el sobre.
+
+1. Abre Telegram y busca: @BotFather
+2. Envía: /newbot
+3. Ponle nombre (ej: Cumple Daira Bot) y un username (ej: cumple_daira_bot)
+4. BotFather te da un TOKEN — cópialo
+
+5. Busca @userinfobot en Telegram, inicia chat → te da tu Chat ID
+
+6. Abre js/config.js y completa:
+   telegramBotToken: "123456:ABC...",
+   telegramChatId: "987654321",
+
+7. Sube a GitHub:
+   cd /home/pietro/proyects/freelance/cumple-daira
+   git add js/config.js js/analytics.js
+   git commit -m "Enable Telegram visit tracking"
+   git push
+
+8. Abre la página tú mismo para probar — deberías recibir un mensaje.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OPCIÓN B — GOOGLE SHEETS (hoja de cálculo)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  Si ves "Google hasn't verified this app":
+    Eso es NORMAL para scripts personales. Solo lo ves TÚ al configurar.
+    Daira NO verá esa pantalla al abrir la página.
+
+    1. Clic en "Advanced" (Avanzado)
+    2. Clic en "Go to ... (unsafe)" / "Ir a ... (no seguro)"
+    3. Permitir acceso
 
 Pasos:
 
-1. Crea una Google Sheet nueva:
-   https://sheets.google.com
-
-2. Menú: Extensiones → Apps Script
-
-3. Borra lo que haya y pega el contenido de:
-   setup/registro-visitas.gs
-
-4. Guardar → Implementar → Nueva implementación
-   - Tipo: Aplicación web
+1. Google Sheet nueva → Extensiones → Apps Script
+2. Pega setup/registro-visitas.gs
+3. Implementar → Aplicación web
    - Ejecutar como: Yo
-   - Quién tiene acceso: Cualquier persona
-   - Implementar
-
-5. Copia la URL que termina en /exec
-
-6. Abre js/config.js y pega la URL en:
-   analyticsWebhookUrl: "https://script.google.com/macros/s/XXXX/exec"
-
-7. Vuelve a subir config.js a GitHub
-
-Eventos que se registran:
-  • visita      → alguien abrió la página
-  • abrio_sobre → abrió el sobre (vio la celebración)
-
-Columnas en la hoja: fecha, evento, IP, país, ciudad, navegador, etc.
+   - Acceso: Cualquier persona
+4. (Si pide permisos → Advanced → Ir a no seguro → Permitir)
+5. Copia URL /exec → js/config.js → analyticsWebhookUrl
+6. git push
 
 
-PARTE 3 — MÚSICA (opcional)
-────────────────────────────
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUÉ SE REGISTRA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Coloca tu MP3 en: audio/musica.mp3
-(Si no hay archivo, suena un tono de cumpleaños de respaldo)
+  visita       → abrió la página
+  abrio_sobre  → abrió el sobre (vio la celebración)
+
+  IP, país, ciudad, hora, dispositivo
 
 
-NOTAS
-─────
-• La IP la detecta un servicio gratuito (ipapi.co / ip-api.com)
-• Si Daira abre desde el móvil verás su IP y país aproximado en la hoja
-• No compartas la URL del Google Sheet, solo la del Apps Script en config.js
+MÚSICA
+──────
+  Copia tu MP3 a audio/musica.mp3 y haz git push
